@@ -34,7 +34,7 @@ module.exports = {
         ],
         "semi": [
             "error",
-            "never"
+            "always"
         ],
         "no-var": 2,
         "dot-notation": [
@@ -46,7 +46,7 @@ module.exports = {
         ],
         "no-useless-constructor": 2,
         "jsx-quotes": ["error", "prefer-double"],
-        "react/prefer-stateless-function": 2,
+        "react/prefer-stateless-function": 1,
         "react/prefer-es6-class": [2, "always"],
         "react/jsx-uses-react": 2,
         "react/jsx-no-undef": 2,
