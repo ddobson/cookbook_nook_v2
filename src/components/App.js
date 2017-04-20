@@ -18,10 +18,24 @@ class App extends Component {
     };
 
     this.handleAuthAction = this.handleAuthAction.bind(this);
+    this.saveUserInfo = this.saveUserInfo.bind(this);
+    this.setLoggedInStatus = this.setLoggedInStatus.bind(this);
   }
 
   handleAuthAction(action, data) {
     return authService.handleAuth(action, data);
+  }
+
+  saveUserInfo(userData) {
+    for (const key in userData.user) {
+      localStorage.setItem(`${key}`, userData.user[key]);
+    }
+
+    this.setLoggedInStatus(true);
+  }
+
+  setLoggedInStatus(bool) {
+    this.setState({ isLoggedIn: bool });
   }
 
   render() {
@@ -31,7 +45,9 @@ class App extends Component {
           <Navigation/>
           <Switch>
             <Route exact path="/" component={ Home }/>
-            <Route exact path="/sign-up" render={() => <SignUp handleSignUp={ this.handleAuthAction }/>}/>
+            <Route exact path="/sign-up" render={ () =>
+              <SignUp  saveUserInfo={ this.saveUserInfo } handleAuthAction={ this.handleAuthAction }/>
+            }/>
           </Switch>
         </div>
       </HashRouter>

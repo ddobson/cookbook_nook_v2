@@ -15,7 +15,12 @@ class SignUp extends React.Component {
     event.preventDefault();
     const data = this.buildFormData();
 
-    this.props.handleSignUp('sign-up', data);
+    this.props.handleAuthAction('sign-up', data)
+      .then(() => this.props.handleAuthAction('sign-in', data))
+      .then((response) => response.json())
+      .then((user) => this.props.saveUserInfo(user))
+      .then(() => this.refs.form.reset())
+      .catch(console.error);
   }
 
   buildFormData() {
