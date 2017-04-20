@@ -10,7 +10,7 @@ class Navigation extends React.Component {
     return (
       <div className="nav-bar">
         <img src={logo} className="logo" alt="cookbook-nook-logo" />
-        <Menu right>
+        <Menu right isOpen={ false }>
           <div className="nav-item">
             <NavLink to="sign-up">Sign Up</NavLink>
           </div>
