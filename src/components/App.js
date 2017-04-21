@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
-import Navigation from './Navigation';
+import Alert from './Alert';
 import Home from './Home';
+import Navigation from './Navigation';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
 
@@ -15,12 +16,22 @@ class App extends Component {
     super();
 
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      alertIsOpen: false,
+      alertMessage: ''
     };
 
     this.handleAuthAction = this.handleAuthAction.bind(this);
     this.saveUserInfo = this.saveUserInfo.bind(this);
+    this.setAlertMessage = this.setAlertMessage.bind(this);
     this.setLoggedInStatus = this.setLoggedInStatus.bind(this);
+  }
+
+  setAlertMessage(alertIsOpen, alertMessage) {
+    this.setState({
+      alertIsOpen,
+      alertMessage: (alertMessage || '')
+    });
   }
 
   handleAuthAction(action, data) {
@@ -43,17 +54,33 @@ class App extends Component {
     return (
       <HashRouter>
         <div className="app">
-          <Navigation isLoggedIn={ this.state.isLoggedIn }
-                      handleAuthAction= { this.handleAuthAction }
-                      setLoggedInStatus={ this.setLoggedInStatus }
+          <Navigation
+            isLoggedIn={ this.state.isLoggedIn }
+            handleAuthAction= { this.handleAuthAction }
+            setLoggedInStatus={ this.setLoggedInStatus }
+          />
+          <Alert
+            alertIsOpen={ this.state.alertIsOpen }
+            alertMessage={ this.state.alertMessage }
+            setAlertMessage={ this.setAlertMessage }
           />
           <Switch>
             <Route exact path="/" component={ Home }/>
             <Route exact path="/sign-up" render={ () =>
-              <SignUp  saveUserInfo={ this.saveUserInfo } handleAuthAction={ this.handleAuthAction }/>
+              <SignUp
+                alertIsOpen={ this.state.alertIsOpen }
+                saveUserInfo={ this.saveUserInfo }
+                handleAuthAction={ this.handleAuthAction }
+                setAlertMessage={ this.setAlertMessage }
+              />
             }/>
           <Route exact path="/sign-in" render={ () =>
-              <SignIn  saveUserInfo={ this.saveUserInfo } handleAuthAction={ this.handleAuthAction }/>
+              <SignIn
+                alertIsOpen={ this.state.alertIsOpen }
+                saveUserInfo={ this.saveUserInfo }
+                handleAuthAction={ this.handleAuthAction }
+                setAlertMessage={ this.setAlertMessage }
+              />
             }/>
           </Switch>
         </div>
