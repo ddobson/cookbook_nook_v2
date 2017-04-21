@@ -19,8 +19,7 @@ class SignUp extends React.Component {
 
     this.props.handleAuthAction('sign-up', data)
       .then(() => this.props.handleAuthAction('sign-in', data))
-      .then((response) => response.json())
-      .then((user) => this.props.saveUserInfo(user))
+      .then((response) => this.props.saveUserInfo(response.data))
       .then(() => {
         if (this.props.alertIsOpen) {
           this.props.setAlertMessage(false);

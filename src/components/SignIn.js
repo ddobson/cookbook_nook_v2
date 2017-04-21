@@ -18,8 +18,7 @@ class SignIn extends React.Component {
     const errorMsg = 'Uh oh! Something went wrong. Please check your credentials and try again.';
 
     this.props.handleAuthAction('sign-in', data)
-      .then((response) => response.json())
-      .then((user) => this.props.saveUserInfo(user))
+      .then((response) => this.props.saveUserInfo(response.data))
       .then(() => this.refs.form.reset())
       .then(() => {
         if (this.props.alertIsOpen) {

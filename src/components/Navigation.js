@@ -18,7 +18,11 @@ class Navigation extends React.Component {
     this.props.handleAuthAction('sign-out')
       .then(() => this.props.setLoggedInStatus(false))
       .then(() => localStorage.clear())
-      .then(() => this.props.history.push('/'));
+      .then(() => {
+        if (this.props.location.pathname !== '/') {
+          this.props.history.push('/');
+        }
+      });
   }
 
   render() {
