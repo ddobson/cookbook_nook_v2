@@ -27,6 +27,16 @@ class App extends Component {
     this.setLoggedInStatus = this.setLoggedInStatus.bind(this);
   }
 
+  componentDidMount() {
+    const errorMsg = 'Something is wrong with your credentials. Please login again.';
+
+    if (localStorage.getItem('token')) {
+      authService.handleAuth('validate')
+        .then(() => this.setLoggedInStatus(true))
+        .catch(() => this.setAlertMessage(true, errorMsg));
+    }
+  }
+
   setAlertMessage(alertIsOpen, alertMessage) {
     this.setState({
       alertIsOpen,
@@ -74,7 +84,7 @@ class App extends Component {
                 setAlertMessage={ this.setAlertMessage }
               />
             }/>
-          <Route exact path="/sign-in" render={ () =>
+            <Route exact path="/sign-in" render={ () =>
               <SignIn
                 alertIsOpen={ this.state.alertIsOpen }
                 saveUserInfo={ this.saveUserInfo }

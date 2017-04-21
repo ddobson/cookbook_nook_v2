@@ -30,6 +30,12 @@ class AuthService {
           'Authorization': `Token token=${localStorage.getItem('token')}`
         }
       });
+    case 'validate':
+      return axios.get(`${baseUrl}/validate-user`, {
+        headers: {
+          'Authorization': `Token token=${localStorage.getItem('token')}`
+        }
+      });
     }
   }
 }
