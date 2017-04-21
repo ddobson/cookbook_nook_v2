@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-flexbox-grid';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import '../styles/forms.scss';
 
@@ -20,6 +20,7 @@ class SignIn extends React.Component {
       .then((response) => response.json())
       .then((user) => this.props.saveUserInfo(user))
       .then(() => this.refs.form.reset())
+      .then(() => this.props.history.push('/'))
       .catch(console.error);
   }
 
@@ -59,4 +60,6 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+const SignInWithRouter = withRouter(SignIn);
+
+export default SignInWithRouter;
