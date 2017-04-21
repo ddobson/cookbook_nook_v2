@@ -46,7 +46,9 @@ class Navigation extends React.Component {
 
     return (
       <div className="nav-bar">
-        <img src={logo} className="logo" alt="cookbook-nook-logo" />
+        <NavLink to="/">
+          <img src={logo} className="logo" alt="cookbook-nook-logo" />
+        </NavLink>
         <Menu right isOpen={ false }>
           { this.props.isLoggedIn ? authdMenu : noAuthdMenu }
         </Menu>
