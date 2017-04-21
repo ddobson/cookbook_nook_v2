@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import '../styles/forms.scss';
 
-class SignUp extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
@@ -16,8 +16,7 @@ class SignUp extends React.Component {
     event.preventDefault();
     const data = this.buildFormData();
 
-    this.props.handleAuthAction('sign-up', data)
-      .then(() => this.props.handleAuthAction('sign-in', data))
+    this.props.handleAuthAction('sign-in', data)
       .then((response) => response.json())
       .then((user) => this.props.saveUserInfo(user))
       .then(() => this.refs.form.reset())
@@ -28,8 +27,7 @@ class SignUp extends React.Component {
     return {
       credentials: {
         email: this.refs.email.value,
-        password: this.refs.password.value,
-        password_confirmation: this.refs.passwordConf.value
+        password: this.refs.password.value
       }
     };
   }
@@ -40,7 +38,7 @@ class SignUp extends React.Component {
         <Col xs={12}>
           <Row center="xs">
             <Col xs={12} sm={8} md={4} className="form-wrap">
-              <h1>Sign Up for an Account</h1>
+              <h1>Sign In to Your Account</h1>
               <form ref="form" id="sign-up-form" className="form" onSubmit={ this.handleSubmit }>
                 <label>
                   <span>Email <span className="req">*</span></span>
@@ -50,15 +48,9 @@ class SignUp extends React.Component {
                   <span>Password <span className="req">*</span></span>
                   <input ref="password" required type="password"/>
                 </label>
-                <label>
-                  <span>Password Confirmation <span className="req">*</span></span>
-                  <input ref="passwordConf" required type="password"/>
-                </label>
-                <div className="center">
-                  <button type="submit">Submit</button>
-                </div>
+                <button type="submit">Submit</button>
               </form>
-              <Link to="sign-in">Already have an account? Login.</Link>
+              <Link to="sign-up">Not a member? Sign-Up!</Link>
             </Col>
           </Row>
         </Col>
@@ -67,4 +59,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default SignIn;

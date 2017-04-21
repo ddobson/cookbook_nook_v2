@@ -4,6 +4,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import Navigation from './Navigation';
 import Home from './Home';
 import SignUp from './SignUp';
+import SignIn from './SignIn';
 
 import AuthService from '../services/AuthService';
 
@@ -47,6 +48,9 @@ class App extends Component {
             <Route exact path="/" component={ Home }/>
             <Route exact path="/sign-up" render={ () =>
               <SignUp  saveUserInfo={ this.saveUserInfo } handleAuthAction={ this.handleAuthAction }/>
+            }/>
+          <Route exact path="/sign-in" render={ () =>
+              <SignIn  saveUserInfo={ this.saveUserInfo } handleAuthAction={ this.handleAuthAction }/>
             }/>
           </Switch>
         </div>
