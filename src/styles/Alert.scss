@@ -1,0 +1,36 @@
+@import 'colors';
+
+.alert {
+  background-color: $red-100;
+  border-radius: 3px;
+  color: $red-500;
+  margin-top: 25px;
+  padding: 15px 0;
+  position: relative;
+
+  .close-alert {
+    color: $blue-grey-800;
+    font-weight: bolder;
+    height: 24px;
+    position: absolute;
+    right: 15px;
+    width: 24px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .cross {
+    background-color: $red-500;
+    height: 16px;
+    position: absolute;
+    top: 3px;
+    transform: rotate(45deg);
+    width: 3px;
+
+    &.reverse {
+      transform: rotate(-45deg);
+    }
+  }
+}
