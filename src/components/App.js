@@ -43,7 +43,10 @@ class App extends Component {
     return (
       <HashRouter>
         <div className="app">
-          <Navigation/>
+          <Navigation isLoggedIn={ this.state.isLoggedIn }
+                      handleAuthAction= { this.handleAuthAction }
+                      setLoggedInStatus={ this.setLoggedInStatus }
+          />
           <Switch>
             <Route exact path="/" component={ Home }/>
             <Route exact path="/sign-up" render={ () =>
