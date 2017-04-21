@@ -15,13 +15,20 @@ class SignIn extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const data = this.buildFormData();
+    const errorMsg = 'Uh oh! Something went wrong. Please check your credentials and try again.';
 
     this.props.handleAuthAction('sign-in', data)
       .then((response) => response.json())
       .then((user) => this.props.saveUserInfo(user))
       .then(() => this.refs.form.reset())
+      .then(() => {
+        if (this.props.alertIsOpen) {
+          this.props.setAlertMessage(false);
+        }
+        this.refs.form.reset();
+      })
       .then(() => this.props.history.push('/'))
-      .catch(console.error);
+      .catch(() => this.props.setAlertMessage(true, errorMsg));
   }
 
   buildFormData() {
