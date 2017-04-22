@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import Alert from './Alert';
+import ChangePassword from './ChangePassword';
 import Home from './Home';
 import Navigation from './Navigation';
 import SignUp from './SignUp';
@@ -86,6 +87,14 @@ class App extends Component {
             }/>
             <Route exact path="/sign-in" render={ () =>
               <SignIn
+                alertIsOpen={ this.state.alertIsOpen }
+                saveUserInfo={ this.saveUserInfo }
+                handleAuthAction={ this.handleAuthAction }
+                setAlertMessage={ this.setAlertMessage }
+              />
+            }/>
+            <Route exact path="/change-password" render={ () =>
+              <ChangePassword
                 alertIsOpen={ this.state.alertIsOpen }
                 saveUserInfo={ this.saveUserInfo }
                 handleAuthAction={ this.handleAuthAction }
