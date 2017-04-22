@@ -9,8 +9,10 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 
 import AuthService from '../services/AuthService';
+import CookbookApiService from '../services/CookbookApiService';
 
 const authService = new AuthService();
+const cbService = new CookbookApiService();
 
 class App extends Component {
   constructor() {
@@ -19,7 +21,8 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
       alertIsOpen: false,
-      alertMessage: ''
+      alertMessage: '',
+      cookbooks: []
     };
 
     this.handleAuthAction = this.handleAuthAction.bind(this);
@@ -33,6 +36,9 @@ class App extends Component {
     if (localStorage.getItem('token')) {
       this.validateUser();
     }
+
+    cbService.getCookbooks()
+      .then((response) => this.setState({ cookbooks: response.data.cookbooks }));
   }
 
   validateUser() {
