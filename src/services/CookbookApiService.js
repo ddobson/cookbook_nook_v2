@@ -27,13 +27,13 @@ class CookbookApiService {
 
   createCookbook(data) {
     return axios.post(`${this.baseUrl}/cookbooks`, data, {
-      headers: this.post
+      headers: this.postAndPatchHeaders
     });
   }
 
   updateCookbook(id, data) {
     return axios.patch(`${this.baseUrl}/cookbooks/${id}`, data, {
-      headers: this.post
+      headers: this.postAndPatchHeaders
     });
   }
 
@@ -45,7 +45,7 @@ class CookbookApiService {
 
   createRecipe(id, data) {
     return axios.post(`${this.baseUrl}/cookbooks/${id}/recipes`, data, {
-      headers: this.post
+      headers: this.postAndPatchHeaders
     });
   }
 
@@ -57,7 +57,7 @@ class CookbookApiService {
 
   updateRecipe(id, data) {
     return axios.patch(`${this.baseUrl}/recipes/${id}`, data, {
-      headers: this.post
+      headers: this.postAndPatchHeaders
     });
   }
 
