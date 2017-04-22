@@ -26,16 +26,21 @@ class App extends Component {
     this.saveUserInfo = this.saveUserInfo.bind(this);
     this.setAlertMessage = this.setAlertMessage.bind(this);
     this.setLoggedInStatus = this.setLoggedInStatus.bind(this);
+    this.validateUser = this.validateUser.bind(this);
   }
 
   componentDidMount() {
+    if (localStorage.getItem('token')) {
+      this.validateUser();
+    }
+  }
+
+  validateUser() {
     const errorMsg = 'Something is wrong with your credentials. Please login again.';
 
-    if (localStorage.getItem('token')) {
-      authService.handleAuth('validate')
-        .then(() => this.setLoggedInStatus(true))
-        .catch(() => this.setAlertMessage(true, errorMsg));
-    }
+    this.handleAuthAction('validate')
+      .then(() => this.setLoggedInStatus(true))
+      .catch(() => this.setAlertMessage(true, errorMsg));
   }
 
   setAlertMessage(alertIsOpen, alertMessage) {
