@@ -1,7 +1,7 @@
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import { NavLink, withRouter } from 'react-router-dom';
-import logo from '../images/logo.svg';
+import logo from '../../public/images/logo.svg';
 
 import '../styles/Navigation.scss';
 
