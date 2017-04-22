@@ -9,7 +9,10 @@ $blue-grey-700: #455A64;
 $blue-grey-800: #37474F;
 $blue-grey-900: #263238;
 
-$overlay: rgba(0, 0, 0, 0.3);
+// Shadows
+$overlay: rgba(0, 0, 0, .3);
+$card-shadow-1: rgba(0, 0, 0, .2);
+$card-shadow-2: rgba(0, 0, 0, .25);
 
 $red-100: #ffcdd2;
 $red-400: #ef5350;

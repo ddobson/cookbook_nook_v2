@@ -30,6 +30,8 @@ class App extends Component {
     this.setAlertMessage = this.setAlertMessage.bind(this);
     this.setLoggedInStatus = this.setLoggedInStatus.bind(this);
     this.validateUser = this.validateUser.bind(this);
+    this.createCookbook = this.createCookbook.bind(this);
+    this.addCookbookToState = this.addCookbookToState.bind(this);
   }
 
   // Lifecycle
@@ -75,7 +77,21 @@ class App extends Component {
     this.setState({ isLoggedIn: bool });
   }
 
+  // Cookbooks
+  createCookbook(data) {
+    return cbService.createCookbook(data);
+  }
+
+  addCookbookToState(cookbook) {
+    const cookbooks = this.state.cookbooks.slice();
+    cookbooks.push(cookbook);
+    this.setState({ cookbooks });
+  }
+
   render() {
+    const cookbooks = this.state.cookbooks;
+    const isLoggedIn = this.state.isLoggedIn;
+
     return (
       <HashRouter>
         <div className="app">
@@ -90,7 +106,14 @@ class App extends Component {
             setAlertMessage={ this.setAlertMessage }
           />
           <Switch>
-            <Route exact path="/" component={ Home }/>
+            <Route exact path="/" render={() =>
+              <Home
+                isLoggedIn={ isLoggedIn }
+                cookbooks={ cookbooks }
+                createCookbook={ this.createCookbook }
+                addCookbookToState={ this.addCookbookToState }
+              />
+            }/>
             <Route exact path="/sign-up" render={ () =>
               <SignUp
                 alertIsOpen={ this.state.alertIsOpen }

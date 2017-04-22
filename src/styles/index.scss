@@ -1,7 +1,7 @@
 @import 'colors';
 
 body {
-  font-family: 'Open Sans', serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -13,4 +13,22 @@ a {
 
 .row {
   margin: 0;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.card {
+  box-shadow: 0 10px 20px $card-shadow-1,
+              0 6px 6px $card-shadow-2;
+  width: 100%;
+
+  h1 {
+    font-size: 32px;
+    margin: 0;
+    padding: 20px 0 15px;
+    text-align: center;
+  }
 }
