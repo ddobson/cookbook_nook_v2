@@ -32,6 +32,7 @@ class App extends Component {
     this.validateUser = this.validateUser.bind(this);
   }
 
+  // Lifecycle
   componentDidMount() {
     if (localStorage.getItem('token')) {
       this.validateUser();
@@ -41,19 +42,21 @@ class App extends Component {
       .then((response) => this.setState({ cookbooks: response.data.cookbooks }));
   }
 
+  // Alerting
+  setAlertMessage(alertIsOpen, alertMessage) {
+    this.setState({
+      alertIsOpen,
+      alertMessage: (alertMessage || '')
+    });
+  }
+
+  // User & Authentication
   validateUser() {
     const errorMsg = 'Something is wrong with your credentials. Please login again.';
 
     this.handleAuthAction('validate')
       .then(() => this.setLoggedInStatus(true))
       .catch(() => this.setAlertMessage(true, errorMsg));
-  }
-
-  setAlertMessage(alertIsOpen, alertMessage) {
-    this.setState({
-      alertIsOpen,
-      alertMessage: (alertMessage || '')
-    });
   }
 
   handleAuthAction(action, data) {
