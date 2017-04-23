@@ -1,0 +1,65 @@
+@import 'colors';
+
+.swatch {
+  box-sizing: border-box;
+  display: flex;
+  padding: 15px;
+
+  h2 {
+    font-size: 1.5em;
+    margin: 0;
+    text-align: center;
+  }
+
+  .swatch-img {
+    margin-right: 15px;
+    max-width: 30%;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+    }
+  }
+}
+
+.swatch-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+
+  .button-group {
+    align-self: flex-end;
+  }
+
+  .btn {
+    background-color: $red-400;
+    border: 2px solid $red-400;
+    border-radius: 3px;
+    color: $white;
+    font-size: 13px;
+    margin-left: 7px;
+    padding: 8px  12px;
+    text-decoration: none;
+
+    &:hover {
+      background-color: darken($red-400, 4%);
+      cursor: pointer;
+    }
+  }
+
+  .btn-inverse {
+    background-color: $white;
+    color: $red-400;
+    padding: 10px 12px;
+
+    &:hover {
+      background-color: darken($white, 4%);
+    }
+  }
+}

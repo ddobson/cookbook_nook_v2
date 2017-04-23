@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'react-flexbox-grid';
 
 import NewCookbookForm from './NewCookbookForm';
+import CookbookSwatch from './CookbookSwatch';
 
 class Home extends Component {
   render() {
@@ -18,6 +19,13 @@ class Home extends Component {
         </Col>
         <Col xs={12} sm={6}>
           <section className="wrapper">
+            {
+              this.props.cookbooks.map((cookbook, i) =>
+                <CookbookSwatch
+                  key={ `cb-${i}` }
+                  cookbook={ cookbook }
+                />)
+            }
           </section>
         </Col>
       </Row>
