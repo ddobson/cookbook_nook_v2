@@ -12,12 +12,19 @@ const CookbookSwatch = (props) => {
       <div className="swatch-content">
         <h2>{ props.cookbook.title }</h2>
         <div className="button-group">
-          <Link to={ `/cookbooks/${props.cookbook.id}` } className="btn">Recipes</Link>
           <button
             className="btn btn-inverse"
             onClick={ () => props.destroyCookbook(props.cookbook.id) }>
               Delete
           </button>
+          <button
+            className="btn"
+            onClick={ () => props.setCookbookEditStates(true, props.cookbook) }>
+              Edit
+          </button>
+          <Link to={ `/cookbooks/${props.cookbook.id}` }>
+            <button className="btn">Recipes</button>
+          </Link>
         </div>
       </div>
     </div>

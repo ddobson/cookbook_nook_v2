@@ -46,3 +46,13 @@ form {
     }
   }
 }
+
+.form-btn-wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  button {
+    width: 49%;
+  }
+}
