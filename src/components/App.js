@@ -31,7 +31,9 @@ class App extends Component {
     this.setLoggedInStatus = this.setLoggedInStatus.bind(this);
     this.validateUser = this.validateUser.bind(this);
     this.createCookbook = this.createCookbook.bind(this);
+    this.destroyCookbook = this.destroyCookbook.bind(this);
     this.addCookbookToState = this.addCookbookToState.bind(this);
+    this.removeCookbookFromState = this.removeCookbookFromState.bind(this);
   }
 
   // Lifecycle
@@ -82,9 +84,19 @@ class App extends Component {
     return cbService.createCookbook(data);
   }
 
+  destroyCookbook(id) {
+    cbService.destroyCookbook(id)
+      .then(() => this.removeCookbookFromState(id));
+  }
+
   addCookbookToState(cookbook) {
     const cookbooks = this.state.cookbooks.slice();
     cookbooks.push(cookbook);
+    this.setState({ cookbooks });
+  }
+
+  removeCookbookFromState(id) {
+    const cookbooks = this.state.cookbooks.slice().filter((cookbook) => cookbook.id !== id);
     this.setState({ cookbooks });
   }
 
@@ -111,6 +123,7 @@ class App extends Component {
                 isLoggedIn={ isLoggedIn }
                 cookbooks={ cookbooks }
                 createCookbook={ this.createCookbook }
+                destroyCookbook={ this.destroyCookbook }
                 addCookbookToState={ this.addCookbookToState }
               />
             }/>

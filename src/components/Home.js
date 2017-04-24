@@ -24,6 +24,7 @@ class Home extends Component {
                 <CookbookSwatch
                   key={ `cb-${i}` }
                   cookbook={ cookbook }
+                  destroyCookbook={ this.props.destroyCookbook }
                 />)
             }
           </section>

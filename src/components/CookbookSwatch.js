@@ -13,7 +13,11 @@ const CookbookSwatch = (props) => {
         <h2>{ props.cookbook.title }</h2>
         <div className="button-group">
           <Link to={ `/cookbooks/${props.cookbook.id}` } className="btn">Recipes</Link>
-          <button className="btn btn-inverse">Delete</button>
+          <button
+            className="btn btn-inverse"
+            onClick={ () => props.destroyCookbook(props.cookbook.id) }>
+              Delete
+          </button>
         </div>
       </div>
     </div>
