@@ -49,7 +49,7 @@ class NewCookbookForm extends React.Component {
             <span>End Page <span className="req">*</span></span>
             <input ref="newCbEnd" required min={1} max={1000} step={1} type="number"/>
           </label>
-          <button>Submit</button>
+          <button type="submit">Submit</button>
         </form>
       </div>
     );
