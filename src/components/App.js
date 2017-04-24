@@ -31,8 +31,10 @@ class App extends Component {
     this.setLoggedInStatus = this.setLoggedInStatus.bind(this);
     this.validateUser = this.validateUser.bind(this);
     this.createCookbook = this.createCookbook.bind(this);
+    this.updateCookbook = this.updateCookbook.bind(this);
     this.destroyCookbook = this.destroyCookbook.bind(this);
     this.addCookbookToState = this.addCookbookToState.bind(this);
+    this.updateCookbookInState = this.updateCookbookInState.bind(this);
     this.removeCookbookFromState = this.removeCookbookFromState.bind(this);
   }
 
@@ -84,6 +86,10 @@ class App extends Component {
     return cbService.createCookbook(data);
   }
 
+  updateCookbook(id, data) {
+    return cbService.updateCookbook(id, data);
+  }
+
   destroyCookbook(id) {
     cbService.destroyCookbook(id)
       .then(() => this.removeCookbookFromState(id));
@@ -92,6 +98,19 @@ class App extends Component {
   addCookbookToState(cookbook) {
     const cookbooks = this.state.cookbooks.slice();
     cookbooks.push(cookbook);
+    this.setState({ cookbooks });
+  }
+
+  updateCookbookInState(cookbook) {
+    const cookbooks = this.state.cookbooks.slice();
+    const targetIndex = cookbooks.findIndex((ogCookbook) => ogCookbook.id === cookbook.id);
+    for (const key in cookbooks[targetIndex]) {
+      if (key === 'id') {
+        continue;
+      }
+
+      cookbooks[targetIndex][key] = cookbook[key];
+    }
     this.setState({ cookbooks });
   }
 
@@ -123,8 +142,10 @@ class App extends Component {
                 isLoggedIn={ isLoggedIn }
                 cookbooks={ cookbooks }
                 createCookbook={ this.createCookbook }
+                updateCookbook={ this.updateCookbook }
                 destroyCookbook={ this.destroyCookbook }
                 addCookbookToState={ this.addCookbookToState }
+                updateCookbookInState={ this.updateCookbookInState }
               />
             }/>
             <Route exact path="/sign-up" render={ () =>
