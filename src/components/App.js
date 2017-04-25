@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import Alert from './Alert';
-import ChangePassword from './ChangePassword';
+import ChangePassword from './forms/ChangePassword';
 import Home from './Home';
 import Navigation from './Navigation';
-import SignUp from './SignUp';
-import SignIn from './SignIn';
+import SignUp from './forms/SignUp';
+import SignIn from './forms/SignIn';
 
 import AuthService from '../services/AuthService';
 import CookbookApiService from '../services/CookbookApiService';

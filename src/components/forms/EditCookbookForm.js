@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/forms.scss';
+import '../../styles/forms.scss';
 
 class EditCookbookForm extends React.Component {
   constructor(props) {

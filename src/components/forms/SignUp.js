@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-flexbox-grid';
 import { Link, withRouter } from 'react-router-dom';
 
-import '../styles/forms.scss';
+import '../../styles/forms.scss';
 
 class SignUp extends React.Component {
   constructor(props) {

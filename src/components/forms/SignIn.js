@@ -1,11 +1,10 @@
 import React from 'react';
-
 import { Row, Col } from 'react-flexbox-grid';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-import '../styles/forms.scss';
+import '../../styles/forms.scss';
 
-class ChangePassword extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
@@ -16,9 +15,10 @@ class ChangePassword extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const data = this.buildFormData();
-    const errorMsg = 'Uh oh! Something went wrong. Please try again.';
+    const errorMsg = 'Uh oh! Something went wrong. Please check your credentials and try again.';
 
-    this.props.handleAuthAction('change-pw', data)
+    this.props.handleAuthAction('sign-in', data)
+      .then((response) => this.props.saveUserInfo(response.data))
       .then(() => this.refs.form.reset())
       .then(() => {
         if (this.props.alertIsOpen) {
@@ -26,14 +26,15 @@ class ChangePassword extends React.Component {
         }
         this.refs.form.reset();
       })
+      .then(() => this.props.history.push('/'))
       .catch(() => this.props.setAlertMessage(true, errorMsg));
   }
 
   buildFormData() {
     return {
-      passwords: {
-        old: this.refs.oldPassword.value,
-        new: this.refs.newPassword.value
+      credentials: {
+        email: this.refs.email.value,
+        password: this.refs.password.value
       }
     };
   }
@@ -44,18 +45,19 @@ class ChangePassword extends React.Component {
         <Col xs={12}>
           <Row center="xs">
             <Col xs={12} sm={8} md={4} className="form-wrap">
-              <h1>Change Your Password</h1>
+              <h1>Sign In to Your Account</h1>
               <form ref="form" id="sign-up-form" className="form" onSubmit={ this.handleSubmit }>
                 <label>
-                  <span>Old Password <span className="req">*</span></span>
-                  <input ref="oldPassword" required type="password"/>
+                  <span>Email <span className="req">*</span></span>
+                  <input ref="email" required type="email"/>
                 </label>
                 <label>
-                  <span>New Password <span className="req">*</span></span>
-                  <input ref="newPassword" required type="password"/>
+                  <span>Password <span className="req">*</span></span>
+                  <input ref="password" required type="password"/>
                 </label>
                 <button type="submit">Submit</button>
               </form>
+              <Link to="sign-up">Not a member? Sign-Up!</Link>
             </Col>
           </Row>
         </Col>
@@ -64,6 +66,6 @@ class ChangePassword extends React.Component {
   }
 }
 
-const ChangePasswordWithRouter = withRouter(ChangePassword);
+const SignInWithRouter = withRouter(SignIn);
 
-export default ChangePasswordWithRouter;
+export default SignInWithRouter;

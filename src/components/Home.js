@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-flexbox-grid';
 
-import NewCookbookForm from './NewCookbookForm';
-import EditCookbookForm from './EditCookbookForm';
+import NewCookbookForm from './forms/NewCookbookForm';
+import EditCookbookForm from './forms/EditCookbookForm';
 import CookbookSwatch from './CookbookSwatch';
 
 class Home extends Component {
