@@ -1,34 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import '../styles/swatch.scss';
 
-const CookbookSwatch = (props) => {
+const RecipeSwatch = (props) => {
   return (
     <div className="card swatch">
       <div className="swatch-img">
         <img src="http://i.imgur.com/4HpnKjz.jpg" alt=""/>
       </div>
       <div className="swatch-content">
-        <h2>{ props.cookbook.title }</h2>
+        <h2>{ props.recipe.title }</h2>
         <div className="button-group">
           <button
             className="btn btn-inverse"
-            onClick={ () => props.destroyCookbook(props.cookbook.id) }>
+            onClick={ () => console.log('delete clicked') }>
               Delete
           </button>
           <button
             className="btn"
-            onClick={ () => props.setCookbookEditStates(true, props.cookbook) }>
+            onClick={ () => console.log('edit clicked') }>
               Edit
           </button>
-          <Link to={ `/cookbooks/${props.cookbook.id}` }>
-            <button className="btn">Recipes</button>
-          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default CookbookSwatch;
+export default RecipeSwatch;

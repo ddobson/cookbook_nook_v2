@@ -3,13 +3,14 @@ import { Row, Col } from 'react-flexbox-grid';
 import { withRouter } from 'react-router-dom';
 
 import NewRecipeForm from './forms/NewRecipeForm';
+import RecipeSwatch from './RecipeSwatch';
 
 class CookbookContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      cookbook: {}
+      cookbook: { recipes: [] }
     };
 
     this.getAndAddCookbookToState = this.getAndAddCookbookToState.bind(this);
@@ -26,6 +27,8 @@ class CookbookContainer extends React.Component {
       .then((cookbook) => this.setState({ cookbook }));
   }
 
+  
+
   render() {
     return (
       <Row>
@@ -37,7 +40,13 @@ class CookbookContainer extends React.Component {
               </div>
             </Col>
             <Col xs={12} sm={6} lg={5}>
-
+              {
+                this.state.cookbook.recipes.map((recipe, i) =>
+                <RecipeSwatch
+                  key={ `recipe-${i}` }
+                  recipe={ recipe }
+                />)
+              }
             </Col>
           </Row>
         </Col>
