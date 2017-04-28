@@ -2,6 +2,8 @@ import React from 'react';
 import { Row, Col } from 'react-flexbox-grid';
 import { withRouter } from 'react-router-dom';
 
+import NewRecipeForm from './forms/NewRecipeForm';
+
 class CookbookContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +33,7 @@ class CookbookContainer extends React.Component {
           <Row center="xs">
             <Col xs={12} sm={6} lg={5}>
               <div className="wrapper">
+                <NewRecipeForm/>
               </div>
             </Col>
             <Col xs={12} sm={6} lg={5}>
@@ -43,7 +46,6 @@ class CookbookContainer extends React.Component {
   }
 }
 
-export default CookbookContainer;
 const CookbookContainerWithRouter = withRouter(CookbookContainer);
 
 export default CookbookContainerWithRouter;
