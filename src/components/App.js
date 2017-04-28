@@ -7,6 +7,7 @@ import Home from './Home';
 import Navigation from './Navigation';
 import SignUp from './forms/SignUp';
 import SignIn from './forms/SignIn';
+import CookbookContainer from './CookbookContainer';
 
 import AuthService from '../services/AuthService';
 import CookbookApiService from '../services/CookbookApiService';
@@ -175,6 +176,11 @@ class App extends Component {
                 saveUserInfo={ this.saveUserInfo }
                 handleAuthAction={ this.handleAuthAction }
                 setAlertMessage={ this.setAlertMessage }
+              />
+            }/>
+          <Route exact path="/cookbooks/:id" render={ () =>
+              <CookbookContainer
+                getCookbook={ this.getCookbook }
               />
             }/>
           </Switch>
