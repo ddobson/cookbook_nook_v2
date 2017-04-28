@@ -5,16 +5,32 @@ import NewCookbookForm from './forms/NewCookbookForm';
 import EditCookbookForm from './forms/EditCookbookForm';
 import CookbookSwatch from './CookbookSwatch';
 
+import CookbookApiService from '../services/CookbookApiService';
+
+const cbService = new CookbookApiService();
+
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      cookbooks: [],
       isEditingCookbook: false,
       cookbookBeingEdited: {}
     };
 
     this.setCookbookEditStates = this.setCookbookEditStates.bind(this);
+    this.createCookbook = this.createCookbook.bind(this);
+    this.updateCookbook = this.updateCookbook.bind(this);
+    this.destroyCookbook = this.destroyCookbook.bind(this);
+    this.addCookbookToState = this.addCookbookToState.bind(this);
+    this.updateCookbookInState = this.updateCookbookInState.bind(this);
+    this.removeCookbookFromState = this.removeCookbookFromState.bind(this);
+  }
+
+  componentDidMount() {
+    cbService.getCookbooks()
+      .then((response) => this.setState({ cookbooks: response.data.cookbooks }));
   }
 
   setCookbookEditStates(isEditingCookbook, cookbook) {
@@ -22,6 +38,44 @@ class Home extends Component {
       isEditingCookbook,
       cookbookBeingEdited: cookbook || {}
     });
+  }
+
+  // Cookbooks
+  createCookbook(data) {
+    return cbService.createCookbook(data);
+  }
+
+  updateCookbook(id, data) {
+    return cbService.updateCookbook(id, data);
+  }
+
+  destroyCookbook(id) {
+    cbService.destroyCookbook(id)
+      .then(() => this.removeCookbookFromState(id));
+  }
+
+  addCookbookToState(cookbook) {
+    const cookbooks = this.state.cookbooks.slice();
+    cookbooks.push(cookbook);
+    this.setState({ cookbooks });
+  }
+
+  updateCookbookInState(cookbook) {
+    const cookbooks = this.state.cookbooks.slice();
+    const targetIndex = cookbooks.findIndex((ogCookbook) => ogCookbook.id === cookbook.id);
+    for (const key in cookbooks[targetIndex]) {
+      if (key === 'id') {
+        continue;
+      }
+
+      cookbooks[targetIndex][key] = cookbook[key];
+    }
+    this.setState({ cookbooks });
+  }
+
+  removeCookbookFromState(id) {
+    const cookbooks = this.state.cookbooks.slice().filter((cookbook) => cookbook.id !== id);
+    this.setState({ cookbooks });
   }
 
   render() {
@@ -32,16 +86,16 @@ class Home extends Component {
             {
               this.state.isEditingCookbook ?
               <EditCookbookForm
-                cookbooks={ this.props.cookbooks }
-                updateCookbook={ this.props.updateCookbook }
-                updateCookbookInState={ this.props.updateCookbookInState }
+                cookbooks={ this.state.cookbooks }
+                updateCookbook={ this.updateCookbook }
+                updateCookbookInState={ this.updateCookbookInState }
                 cookbookBeingEdited={ this.state.cookbookBeingEdited }
                 setCookbookEditStates={ this.setCookbookEditStates }
               /> :
               <NewCookbookForm
-                cookbooks={ this.props.cookbooks }
-                createCookbook={ this.props.createCookbook }
-                addCookbookToState={ this.props.addCookbookToState }
+                cookbooks={ this.state.cookbooks }
+                createCookbook={ this.createCookbook }
+                addCookbookToState={ this.addCookbookToState }
               />
             }
           </section>
@@ -49,7 +103,7 @@ class Home extends Component {
         <Col xs={12} sm={6}>
           <section className="wrapper">
             {
-              this.props.cookbooks.map((cookbook, i) =>
+              this.state.cookbooks.map((cookbook, i) =>
                 <CookbookSwatch
                   key={ `cb-${i}` }
                   cookbook={ cookbook }
