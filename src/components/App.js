@@ -31,6 +31,7 @@ class App extends Component {
     this.setLoggedInStatus = this.setLoggedInStatus.bind(this);
     this.validateUser = this.validateUser.bind(this);
     this.createCookbook = this.createCookbook.bind(this);
+    this.getCookbook = this.getCookbook.bind(this);
     this.updateCookbook = this.updateCookbook.bind(this);
     this.destroyCookbook = this.destroyCookbook.bind(this);
     this.addCookbookToState = this.addCookbookToState.bind(this);
@@ -84,6 +85,10 @@ class App extends Component {
   // Cookbooks
   createCookbook(data) {
     return cbService.createCookbook(data);
+  }
+
+  getCookbook(id) {
+    return cbService.getCookbook(id);
   }
 
   updateCookbook(id, data) {
