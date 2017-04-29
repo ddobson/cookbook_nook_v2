@@ -12,14 +12,19 @@ class NewRecipeForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // const formData = this.buildFormData();
+    const form = this.refs.form;
+    const formData = this.buildFormData();
 
+    this.props.createRecipe(formData)
+      .then(() => this.props.getAndAddCookbookToState())
+      .then(() => form.reset())
+      .catch(console.error);
   }
 
   buildFormData() {
     return {
       recipe: {
-        title: this.refs.newRecipeTitle.value,
+        name: this.refs.newRecipeName.value,
         start_page: this.refs.newRecipeStart.value,
         end_page: this.refs.newRecipeEnd.value
       }
@@ -33,7 +38,7 @@ class NewRecipeForm extends React.Component {
         <form ref="form" onSubmit={ this.handleSubmit }>
           <label>
             <span>Name <span className="req">*</span></span>
-            <input ref="newRecipeTitle" required maxLength={125} type="text"/>
+            <input ref="newRecipeName" required maxLength={125} type="text"/>
           </label>
           <label>
             <span>Start Page <span className="req">*</span></span>
