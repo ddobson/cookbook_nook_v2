@@ -9,7 +9,7 @@ const RecipeSwatch = (props) => {
         <img src="http://i.imgur.com/4HpnKjz.jpg" alt=""/>
       </div>
       <div className="swatch-content">
-        <h2>{ props.recipe.title }</h2>
+        <h2>{ props.recipe.name }</h2>
         <div className="button-group">
           <button
             className="btn btn-inverse"
