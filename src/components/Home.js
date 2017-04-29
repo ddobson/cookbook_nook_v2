@@ -81,37 +81,41 @@ class Home extends Component {
   render() {
     const Main = (
       <Row>
-        <Col xs={12} sm={6}>
-          <section className="wrapper">
-            {
-              this.state.isEditingCookbook ?
-              <EditCookbookForm
-                cookbooks={ this.state.cookbooks }
-                updateCookbook={ this.updateCookbook }
-                updateCookbookInState={ this.updateCookbookInState }
-                cookbookBeingEdited={ this.state.cookbookBeingEdited }
-                setCookbookEditStates={ this.setCookbookEditStates }
-              /> :
-              <NewCookbookForm
-                cookbooks={ this.state.cookbooks }
-                createCookbook={ this.createCookbook }
-                addCookbookToState={ this.addCookbookToState }
-              />
-            }
-          </section>
-        </Col>
-        <Col xs={12} sm={6}>
-          <section className="wrapper">
-            {
-              this.state.cookbooks.map((cookbook, i) =>
-                <CookbookSwatch
-                  key={ `cb-${i}` }
-                  cookbook={ cookbook }
-                  destroyCookbook={ this.props.destroyCookbook }
-                  setCookbookEditStates={ this.setCookbookEditStates }
-                />)
-            }
-          </section>
+        <Col col={12}>
+          <Row center="xs">
+            <Col xs={12} sm={6} lg={5}>
+              <section className="wrapper">
+                {
+                  this.state.isEditingCookbook ?
+                  <EditCookbookForm
+                    cookbooks={ this.state.cookbooks }
+                    updateCookbook={ this.updateCookbook }
+                    updateCookbookInState={ this.updateCookbookInState }
+                    cookbookBeingEdited={ this.state.cookbookBeingEdited }
+                    setCookbookEditStates={ this.setCookbookEditStates }
+                  /> :
+                  <NewCookbookForm
+                    cookbooks={ this.state.cookbooks }
+                    createCookbook={ this.createCookbook }
+                    addCookbookToState={ this.addCookbookToState }
+                  />
+                }
+              </section>
+            </Col>
+            <Col xs={12} sm={6} lg={5}>
+              <section className="wrapper">
+                {
+                  this.state.cookbooks.map((cookbook, i) =>
+                    <CookbookSwatch
+                      key={ `cb-${i}` }
+                      cookbook={ cookbook }
+                      destroyCookbook={ this.props.destroyCookbook }
+                      setCookbookEditStates={ this.setCookbookEditStates }
+                    />)
+                }
+              </section>
+            </Col>
+          </Row>
         </Col>
       </Row>
     );
