@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import NewRecipeForm from './forms/NewRecipeForm';
 import RecipeSwatch from './RecipeSwatch';
+import RandomPage from './RandomPage';
 
 import CookbookApiService from '../services/CookbookApiService';
 
@@ -50,6 +51,9 @@ class CookbookContainer extends React.Component {
           <Row center="xs">
             <Col xs={12} sm={6} lg={5}>
               <div className="wrapper">
+                <RandomPage
+                  availPages={ this.state.cookbook.avail_pages }
+                />
                 <NewRecipeForm
                   createRecipe={ this.createRecipe }
                   getAndAddCookbookToState={ this.getAndAddCookbookToState }
